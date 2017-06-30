@@ -131,6 +131,8 @@ function showSuccessMessage (scriptName) {
     - ./${scriptName}
     - npm test
 
+  - edit file ${scriptName} to set specific upgrade options
+
   👍  Zero noise
   👍  Trivial to setup
   👍  Up to date dependencies
