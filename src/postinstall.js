@@ -70,13 +70,58 @@ else
   echo "Not a cron job, normal test"
 fi
 `
-const outputFilename = join(process.cwd(), '..', '..', 'next-update-travis.sh')
-if (existsSync(outputFilename)) {
-  debug('output file %s already exists', outputFilename)
+
+const scriptName = 'next-update-travis.sh'
+
+function fullScriptFilename (filename) {
+  return join(process.cwd(), '..', '..', filename)
+}
+
+function alreadyInstalled (filename) {
+  return existsSync(fullScriptFilename(filename))
+}
+
+if (alreadyInstalled(scriptName)) {
+  debug('output file %s already exists', scriptName)
   process.exit(0)
 }
-debug('writing script %s', outputFilename)
-writeFileSync(outputFilename, script + '\n', 'utf8')
-debug('setting read / write / execute permissions')
-// 511 is same as 0777 in octal, which is -rwxrwxrwx
-chmodSync(outputFilename, 511)
+
+function saveScript (filename) {
+  const outputFilename = join(process.cwd(), '..', '..', filename)
+  debug('writing script %s', outputFilename)
+  writeFileSync(outputFilename, script + '\n', 'utf8')
+  debug('setting read / write / execute permissions')
+  // 511 is same as 0777 in octal, which is -rwxrwxrwx
+  chmodSync(outputFilename, 511)
+}
+
+function showSuccessMessage (scriptName) {
+  const msg = stripIndent`
+  🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
+  🎉                                                               🎉
+  🎉  you have installed next-update TravisCI helper               🎉
+  🎉  The simplest way to ensure your dependencies are up to date. 🎉
+  🎉                                                               🎉
+  🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
+
+  - you need GH_TOKEN environment variable to push package.json updates
+    I recommend using semantic-release:
+      https://github.com/semantic-release/semantic-release
+  - Turn on TravisCI CRON job https://docs.travis-ci.com/user/cron-jobs/
+  - Add '${scriptName}' command to .travis.yml file like this
+
+  script:
+    - ./${scriptName}
+    - npm test
+
+  👍  Zero noise
+  👍  Trivial to setup
+  👍  Up to date dependencies
+
+  For more details: https://github.com/bahmutov/next-update-travis
+  `
+  console.log(msg)
+}
+
+saveScript()
+showSuccessMessage(scriptName)
