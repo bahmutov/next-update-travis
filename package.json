@@ -59,7 +59,8 @@
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run unit",
     "unit": "mocha src/*-spec.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "postinstall": "node src/postinstall.js"
   },
   "devDependencies": {
     "ban-sensitive-files": "1.9.0",
@@ -77,5 +78,10 @@
   },
   "release": {
     "analyzeCommits": "simple-commit-message"
+  },
+  "dependencies": {
+    "am-i-a-dependency": "1.0.0",
+    "common-tags": "1.4.0",
+    "debug": "2.6.8"
   }
 }
