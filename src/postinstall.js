@@ -16,60 +16,77 @@ debug('installing this module as a dependency')
 const {join} = require('path')
 const {existsSync, writeFileSync, chmodSync} = require('fs')
 const {stripIndent} = require('common-tags')
-const script = stripIndent`
-#!/bin/bash
+const execa = require('execa')
+const gh = require('parse-github-url')
 
-set -e
+function getOriginUrl () {
+  return execa.shell('git remote get-url origin')
+    .then(response => response.stdout)
+    .then(s => s.trim())
+}
 
-if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then
-  if [ "$GH_TOKEN" = "" ]; then
-    echo ""
-    echo "⛔️ Cannot find environment variable GH_TOKEN ⛔️"
-    echo "Please set it up for this script to be able"
-    echo "to push results to GitHub"
-    echo "ℹ️ The best way is to use semantic-release to set it up"
-    echo ""
-    echo "  https://github.com/semantic-release/semantic-release"
-    echo ""
-    echo "npm i -g semantic-release-cli"
-    echo "semantic-release-cli setup"
-    echo ""
-    exit 1
-  fi
+function getScript (originUrl) {
+  debug('origin url', originUrl)
+  const parsed = gh(originUrl)
+  const tokenUrl = `https://next-update:$GH_TOKEN@github.com/${parsed.repo}.git`
+  debug('token url', tokenUrl)
 
-  echo "Upgrading dependencies using next-update"
-  npm i -g next-update
+  const script = stripIndent`
+  #!/bin/bash
 
-  # you can edit options to allow only some updates
-  # --allow major | minor | patch
-  # --latest true | false
-  # see all options by installing next-update
-  # and running next-update -h
-  next-update --allow minor --latest false
+  set -e
 
-  git status
-  # if package.json is modified we have
-  # new upgrades
-  if git diff --name-only | grep package.json > /dev/null; then
-    echo "There are new versions of dependencies 💪"
-    git add package.json
-    git config --global user.email "next-update@ci.com"
-    git config --global user.name "next-update"
-    git commit -m "chore(deps): upgrade dependencies using next-update"
-    # push back to GitHub using token
-    git remote remove origin
-    # TODO read origin from package.json
-    # or use github api module github
-    # like in https://github.com/semantic-release/semantic-release/blob/caribou/src/post.js
-    git remote add origin https://next-update:$GH_TOKEN@github.com/bahmutov/last-commit.git
-    git push origin HEAD:master
+  if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then
+    if [ "$GH_TOKEN" = "" ]; then
+      echo ""
+      echo "⛔️ Cannot find environment variable GH_TOKEN ⛔️"
+      echo "Please set it up for this script to be able"
+      echo "to push results to GitHub"
+      echo "ℹ️ The best way is to use semantic-release to set it up"
+      echo ""
+      echo "  https://github.com/semantic-release/semantic-release"
+      echo ""
+      echo "npm i -g semantic-release-cli"
+      echo "semantic-release-cli setup"
+      echo ""
+      exit 1
+    fi
+
+    echo "Upgrading dependencies using next-update"
+    npm i -g next-update
+
+    # you can edit options to allow only some updates
+    # --allow major | minor | patch
+    # --latest true | false
+    # see all options by installing next-update
+    # and running next-update -h
+    next-update --allow minor --latest false
+
+    git status
+    # if package.json is modified we have
+    # new upgrades
+    if git diff --name-only | grep package.json > /dev/null; then
+      echo "There are new versions of dependencies 💪"
+      git add package.json
+      git config --global user.email "next-update@ci.com"
+      git config --global user.name "next-update"
+      git commit -m "chore(deps): upgrade dependencies using next-update"
+      # push back to GitHub using token
+      git remote remove origin
+      # TODO read origin from package.json
+      # or use github api module github
+      # like in https://github.com/semantic-release/semantic-release/blob/caribou/src/post.js
+      git remote add origin ${tokenUrl}
+      git push origin HEAD:master
+    else
+      echo "No new versions found ✋"
+    fi
   else
-    echo "No new versions found ✋"
+    echo "Not a cron job, normal test"
   fi
-else
-  echo "Not a cron job, normal test"
-fi
-`
+  `
+  return script
+}
 
 const scriptName = 'next-update-travis.sh'
 
@@ -86,7 +103,7 @@ if (alreadyInstalled(scriptName)) {
   process.exit(0)
 }
 
-function saveScript (filename) {
+function saveScript (filename, script) {
   const outputFilename = join(process.cwd(), '..', '..', filename)
   debug('writing script %s', outputFilename)
   writeFileSync(outputFilename, script + '\n', 'utf8')
@@ -97,12 +114,12 @@ function saveScript (filename) {
 
 function showSuccessMessage (scriptName) {
   const msg = stripIndent`
-  🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
+  ==================================================================
   🎉                                                               🎉
   🎉  you have installed next-update TravisCI helper               🎉
   🎉  The simplest way to ensure your dependencies are up to date. 🎉
   🎉                                                               🎉
-  🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
+  ==================================================================
 
   - you need GH_TOKEN environment variable to push package.json updates
     I recommend using semantic-release:
@@ -123,5 +140,12 @@ function showSuccessMessage (scriptName) {
   console.log(msg)
 }
 
-saveScript()
-showSuccessMessage(scriptName)
+getOriginUrl()
+  .then(getScript)
+  .then(saveScript.bind(null, scriptName))
+  .then(() => showSuccessMessage(scriptName))
+  .catch(err => {
+    console.error('🔥  something went wrong')
+    console.error(err.message)
+    process.exit(1)
+  })
