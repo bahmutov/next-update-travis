@@ -1,7 +1,7 @@
 {
   "name": "next-update-travis",
   "description": "Safely update your dependencies using TravisCI cron jobs",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bugs": "https://github.com/bahmutov/next-update-travis/issues",
   "config": {
@@ -58,7 +58,8 @@
     "secure": "nsp check",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run unit",
-    "unit": "mocha src/*-spec.js"
+    "unit": "mocha src/*-spec.js",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "devDependencies": {
     "ban-sensitive-files": "1.9.0",
@@ -69,6 +70,8 @@
     "mocha": "3.4.2",
     "nsp": "2.6.3",
     "pre-git": "3.15.0",
+    "prettier-standard": "6.0.0",
+    "semantic-release": "^6.3.6",
     "simple-commit-message": "3.0.2",
     "standard": "10.0.2"
   },
