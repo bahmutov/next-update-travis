@@ -49,6 +49,12 @@ for authentication. The simplest way to set this token is by using
 [semantic-release]: https://github.com/semantic-release/semantic-release
 [sem setup]: https://github.com/semantic-release/semantic-release#setup
 
+Cron job will run, and if dependencies can be successfully upgraded, the
+update will be pushed (triggering normal Travis build). It will look
+something like this in the build history
+
+![Two successful upgrades](images/updated-deps-build-history.png)
+
 ## Options
 
 You can tweak which updates are checked by editing `next-update-travis.sh`
