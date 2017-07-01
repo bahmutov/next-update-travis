@@ -70,24 +70,30 @@ next-update --allow patch
 
 ## FAQ
 
-<details>
+* <details>
   <summary>What if my tests are not comprehensive enough to feel safe?</summary>
+  <br>
   You can control which modules <a href="https://github.com/bahmutov/next-update#checking-specific-modules">are checked</a> or <a href="https://github.com/bahmutov/next-update#ignoring-or-skipping-some-modules">skipped</a>
+  <br>
 </details>
 
-<details>
+* <details>
   <summary>"npm test" is not my testing command</summary>
+  <br>
   You can use a different command and even a custom command per module,
   see <a href="https://github.com/bahmutov/next-update#custom-test-command-per-module">docs</a>
+  <br>
 </details>
 
-<details>
+* <details>
   <summary>I only want to test and update to dependencies that others have successfully tested</summary>
+  <br>
   `next-update` uses public anonymous <a href="https://github.com/bahmutov/next-update#anonymous-usage-collection">statistics</a> to show success
   percentage for each specific update.
   When <a href="https://github.com/bahmutov/next-update/issues/107">bahmutov/next-update#107</a> is implemented
   it will be possible to automatically upgrade only the packages that were
   successfully upgraded by others 100% of the time for example.
+  <br>
 </details>
 
 ### Small print
