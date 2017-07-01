@@ -13,10 +13,54 @@
 Requires [Node](https://nodejs.org/en/) version 6 or above.
 
 ```sh
-npm install --save next-update-travis
+npm install --save-dev next-update-travis
 ```
 
+It is highly recommended to set up `next-update-travis` *after*
+[enabling semantic release][sem setup] on Travis CI.
+
 ## Use
+
+Take any Node project and install `next-update-travis` as a dev dependency.
+This will create a shell script file `next-update-travis.sh` in the project.
+Add this script to your `.travis.yml` `script` step.
+
+```yaml
+script:
+  - ./next-update-travis.sh
+  - npm test
+```
+
+Then enable a [cron job][cron job] on Travis. `next-update-travis.sh` skips
+running its command automatically for non-cron jobs.
+
+![Travis CI cron job](images/cron-job.png)
+
+That's it.
+
+**Important**
+
+If there are dependencies that the `next-update-travis.sh` could safely
+upgrade, it will commit and push the change back to GitHub using `GH_TOKEN`
+for authentication. The simplest way to set this token is by using
+[semantic-release][semantic-release], see [it's setup][sem setup].
+
+[cron job]: https://docs.travis-ci.com/user/cron-jobs/
+[semantic-release]: https://github.com/semantic-release/semantic-release
+[sem setup]: https://github.com/semantic-release/semantic-release#setup
+
+## Options
+
+You can tweak which updates are checked by editing `next-update-travis.sh`
+script. Under the hood it uses [next-update][next-update] to check dependencies.
+For example, to only consider patches (fixes) you can modify the shell command
+to be
+
+```sh
+next-update --allow patch
+```
+
+[next-update]: https://github.com/bahmutov/next-update
 
 ### Small print
 
