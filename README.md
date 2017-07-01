@@ -62,6 +62,33 @@ next-update --allow patch
 
 [next-update]: https://github.com/bahmutov/next-update
 
+## FAQ
+
+<details>
+  <summary>What if my tests are not comprehensive enough to feel safe?</summary>
+  You can control which modules [are checked][whitelist] or [skipped][blacklist]
+</details>
+
+<details>
+  <summary>"npm test" is not my testing command</summary>
+  You can use a different command and even a custom command per module,
+  see [docs][test command]
+</details>
+
+<details>
+  <summary>I only want to test and update to dependencies that others have successfully tested</summary>
+  `next-update` uses public anonymous [statistics][stats] to show success
+  percentage for each specific update.
+  When [bahmutov/next-update#107](bahmutov/next-update#107) is implemented
+  it will be possible to automatically upgrade only the packages that were
+  successfully upgraded by others 100% of the time for example.
+</details>
+
+[whitelist]: https://github.com/bahmutov/next-update#checking-specific-modules
+[blacklist]: https://github.com/bahmutov/next-update#ignoring-or-skipping-some-modules
+[test command]: https://github.com/bahmutov/next-update#custom-test-command-per-module
+[stats]: https://github.com/bahmutov/next-update#anonymous-usage-collection
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2017
