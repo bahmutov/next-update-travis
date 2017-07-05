@@ -71,6 +71,17 @@ next-update --allow patch
 ## FAQ
 
 * <details>
+    <summary>Why do you hate <a href="https://greenkeeper.io/">greenkeeper.io</a>?</summary>
+    <br>
+    I ♥️ Greenkeeper! And I use <a href="https://github.com/semantic-release/semantic-release">semantic-release</a>
+    on <b>every single one</b> of my NPM packages. But Greenkeeper is too scared to
+    merge suggested dependency updates, creating so many pull requests ...
+    I want less noise and fully automated solution; with options to control which
+    modules are tested, how and the global update stats, I feel we finally can
+    take the human out of the loop.
+    </details>
+
+* <details>
     <summary>What if my tests are not comprehensive enough to feel safe?</summary>
     <br>
     You can control which modules <a href="https://github.com/bahmutov/next-update#checking-specific-modules">are checked</a> or <a href="https://github.com/bahmutov/next-update#ignoring-or-skipping-some-modules">skipped</a>
