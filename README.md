@@ -70,53 +70,56 @@ next-update --allow patch
 
 ## FAQ
 
-* <details>
-    <summary>Why do you hate <a href="https://greenkeeper.io/">greenkeeper.io</a>?</summary>
-    <br>
-    I ♥️ Greenkeeper! And I use <a href="https://github.com/semantic-release/semantic-release">semantic-release</a>
-    on <b>every single one</b> of my NPM packages. But Greenkeeper is too scared to
-    merge suggested dependency updates, creating so many pull requests ...
-    I want less noise and fully automated solution; with options to control which
-    modules are tested, how and the global update stats, I feel we finally can
-    take the human out of the loop.
-    </details>
+<details>
+<summary>Why do you hate <a href="https://greenkeeper.io/">greenkeeper.io</a>?</summary>
+<br>
+I ♥️ Greenkeeper! And I use <a href="https://github.com/semantic-release/semantic-release">semantic-release</a>
+on <b>every single one</b> of my NPM packages. But Greenkeeper is too scared to
+merge suggested dependency updates, creating so many pull requests ...
+I want less noise and fully automated solution; with options to control which
+modules are tested, how and the global update stats, I feel we finally can
+take the human out of the loop.
+<hr>
+</details>
 
-* <details>
-    <summary>What if my tests are not comprehensive enough to feel safe?</summary>
-    <br>
-    You can control which modules <a href="https://github.com/bahmutov/next-update#checking-specific-modules">are checked</a> or <a href="https://github.com/bahmutov/next-update#ignoring-or-skipping-some-modules">skipped</a>
-    <br>
-  </details>
+<details>
+<summary>What if my tests are not comprehensive enough to feel safe?</summary>
+<br>
+You can control which modules <a href="https://github.com/bahmutov/next-update#checking-specific-modules">are checked</a> or <a href="https://github.com/bahmutov/next-update#ignoring-or-skipping-some-modules">skipped</a>
+<hr>
+</details>
 
-* <details>
-    <summary>"npm test" is not my testing command</summary>
-    <br>
-    You can use a different command and even a custom command per module,
-    see <a href="https://github.com/bahmutov/next-update#custom-test-command-per-module">docs</a>
-    <br>
-  </details>
+<details>
+<summary>"npm test" is not my testing command</summary>
+<br>
+You can use a different command and even a custom command per module,
+see <a href="https://github.com/bahmutov/next-update#custom-test-command-per-module">docs</a>
+<hr>
+</details>
 
-* <details>
-    <summary>I only want to test and update to dependencies that others have successfully tested</summary>
-    <br>
-    `next-update` uses public anonymous <a href="https://github.com/bahmutov/next-update#anonymous-usage-collection">statistics</a> to show success
-    percentage for each specific update.
-    When <a href="https://github.com/bahmutov/next-update/issues/107">bahmutov/next-update#107</a> is implemented
-    it will be possible to automatically upgrade only the packages that were
-    successfully upgraded by others 100% of the time for example.
-    <br>
-  </details>
+<details>
+<summary>I only want to test and update to dependencies that others have successfully tested</summary>
+<br>
+<code>next-update</code> uses public anonymous <a href="https://github.com/bahmutov/next-update#anonymous-usage-collection">statistics</a> to show success
+percentage for each specific update.
+When <a href="https://github.com/bahmutov/next-update/issues/107">bahmutov/next-update#107</a> is implemented
+it will be possible to automatically upgrade only the packages that were
+successfully upgraded by others 100% of the time for example.
+<hr>
+</details>
 
-* <details>
-    <summary>Help, it updated dependencies and published new broken version!</summary>
-    <br>
-    Hmm, `next-update-travis` commits its change with `chore(deps): ...` message,
-    which should NOT publish new NPM version according to semantic versioning
-    convention. Well, the beauty of Git is that you can always roll back the
-    commit and then
-    <a href="https://github.com/bahmutov/next-update#ignoring-or-skipping-some-modules">blacklist</a>
-    the specific modules that are causing problems.
-  </details>
+<details>
+<summary>Help, it updated dependencies and published new broken version!</summary>
+<br>
+Hmm, <code>next-update-travis</code> commits its change with
+<code>chore(deps): ...</code> message,
+which should NOT publish new NPM version according to semantic versioning
+convention. Well, the beauty of Git is that you can always roll back the
+commit and then
+<a href="https://github.com/bahmutov/next-update#ignoring-or-skipping-some-modules">blacklist</a>
+the specific modules that are causing problems.
+<hr>
+</details>
 
 ### Small print
 
