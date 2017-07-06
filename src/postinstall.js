@@ -4,8 +4,9 @@
 
 const debug = require('debug')('next-update-travis')
 const amIaDependency = require('am-i-a-dependency')
+const isForced = process.argv.some(a => a === '--force')
 
-if (!amIaDependency()) {
+if (!amIaDependency() && !isForced) {
   // top level install (we are running `npm i` in this project)
   debug('we are installing own dependencies')
   process.exit(0)
