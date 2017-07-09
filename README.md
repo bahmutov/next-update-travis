@@ -16,6 +16,15 @@ Requires [Node](https://nodejs.org/en/) version 6 or above.
 npm install --save-dev next-update-travis
 ```
 
+This will create file `next-update-travis.sh` you can tweak. If you need to
+reinstall (because new version of `next-update-travis` is available), just
+remove the file and install again
+
+```sh
+rm next-update-travis.sh
+npm i next-update-travis
+```
+
 It is highly recommended to set up `next-update-travis` *after*
 [enabling semantic release][sem setup] on Travis CI.
 
