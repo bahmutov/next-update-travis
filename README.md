@@ -86,7 +86,7 @@ Markdown SVG badge
 
 ```
 [![next-update-travis badge][badge]][readme]
-[badge]: https://img.shields.io/badge/next--updat--20travis-%E2%9C%94%EF%B8%8F-green.svg
+[badge]: https://img.shields.io/badge/next--update--travis-%E2%9C%94%EF%B8%8F-green.svg
 [readme]: https://github.com/bahmutov/next-update-travis#readme
 ```
 
@@ -190,5 +190,5 @@ OTHER DEALINGS IN THE SOFTWARE.
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg
 [standard-url]: http://standardjs.com/
 
-[badge]: https://img.shields.io/badge/next--updat--20travis-%E2%9C%94%EF%B8%8F-green.svg
+[badge]: https://img.shields.io/badge/next--update--travis-%E2%9C%94%EF%B8%8F-green.svg
 [readme]: https://github.com/bahmutov/next-update-travis#readme
