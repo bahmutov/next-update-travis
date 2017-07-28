@@ -14,8 +14,8 @@ if (!amIaDependency() && !isForced) {
 
 debug('installing this module as a dependency')
 
-const {join} = require('path')
-const {existsSync, writeFileSync, chmodSync} = require('fs')
+const join = require('path').join
+const fs = require('fs')
 const {stripIndent} = require('common-tags')
 const execa = require('execa')
 const gh = require('parse-github-url')
@@ -99,7 +99,7 @@ function fullScriptFilename (filename) {
 }
 
 function alreadyInstalled (filename) {
-  return existsSync(fullScriptFilename(filename))
+  return fs.existsSync(fullScriptFilename(filename))
 }
 
 if (alreadyInstalled(scriptName)) {
@@ -110,10 +110,10 @@ if (alreadyInstalled(scriptName)) {
 function saveScript (filename, script) {
   const outputFilename = join(process.cwd(), '..', '..', filename)
   debug('writing script %s', outputFilename)
-  writeFileSync(outputFilename, script + '\n', 'utf8')
+  fs.writeFileSync(outputFilename, script + '\n', 'utf8')
   debug('setting read / write / execute permissions')
   // 511 is same as 0777 in octal, which is -rwxrwxrwx
-  chmodSync(outputFilename, 511)
+  fs.chmodSync(outputFilename, 511)
 }
 
 function showSuccessMessage (scriptName) {
