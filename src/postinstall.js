@@ -142,6 +142,12 @@ function showSuccessMessage (scriptName) {
   👍  Up to date dependencies
 
   For more details: https://github.com/bahmutov/next-update-travis
+
+  Optional: add this badge to the README.md file
+
+  [![next-update-travis badge][nut-badge]][nut-readme]
+  [nut-badge]: https://img.shields.io/badge/next--update--travis-ok-green.svg
+  [nut-readme]: https://github.com/bahmutov/next-update-travis#readme
   `
   console.log(msg)
 }
