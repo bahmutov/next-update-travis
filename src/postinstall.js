@@ -6,13 +6,14 @@ const debug = require('debug')('next-update-travis')
 const amIaDependency = require('am-i-a-dependency')
 const isForced = process.argv.some(a => a === '--force')
 
-if (!amIaDependency() && !isForced) {
-  // top level install (we are running `npm i` in this project)
-  debug('we are installing own dependencies')
-  process.exit(0)
+function verifyIsNotSelfInstall () {
+  if (!amIaDependency() && !isForced) {
+    // top level install (we are running `npm i` in this project)
+    debug('we are installing own dependencies')
+    process.exit(0)
+  }
+  debug('installing this module as a dependency')
 }
-
-debug('installing this module as a dependency')
 
 const join = require('path').join
 const fs = require('fs')
@@ -102,9 +103,11 @@ function alreadyInstalled (filename) {
   return fs.existsSync(fullScriptFilename(filename))
 }
 
-if (alreadyInstalled(scriptName)) {
-  debug('output file %s already exists', scriptName)
-  process.exit(0)
+function verifyNotInstalled () {
+  if (alreadyInstalled(scriptName)) {
+    debug('output file %s already exists', scriptName)
+    process.exit(0)
+  }
 }
 
 function saveScript (filename, script) {
@@ -161,6 +164,8 @@ function postInstall () {
 if (module.parent) {
   module.exports = postInstall
 } else {
+  verifyIsNotSelfInstall()
+  verifyNotInstalled()
   postInstall()
     .then(() => showSuccessMessage(scriptName))
     .catch(err => {
