@@ -12,7 +12,7 @@
 
 ## Install
 
-Requires [Node](https://nodejs.org/en/) version 6 or above.
+Requires [Node](https://nodejs.org/en/) version 4 or above.
 
 ```sh
 npm install --save-dev next-update-travis
