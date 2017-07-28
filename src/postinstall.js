@@ -16,7 +16,7 @@ debug('installing this module as a dependency')
 
 const join = require('path').join
 const fs = require('fs')
-const {stripIndent} = require('common-tags')
+const stripIndent = require('common-tags').stripIndent
 const execa = require('execa')
 const gh = require('parse-github-url')
 
