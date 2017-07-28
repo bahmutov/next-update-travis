@@ -152,12 +152,20 @@ function showSuccessMessage (scriptName) {
   console.log(msg)
 }
 
-getOriginUrl()
-  .then(getScript)
-  .then(saveScript.bind(null, scriptName))
-  .then(() => showSuccessMessage(scriptName))
-  .catch(err => {
-    console.error('🔥  something went wrong')
-    console.error(err.message)
-    process.exit(1)
-  })
+function postInstall () {
+  return getOriginUrl()
+    .then(getScript)
+    .then(saveScript.bind(null, scriptName))
+}
+
+if (module.parent) {
+  module.exports = postInstall
+} else {
+  postInstall()
+    .then(() => showSuccessMessage(scriptName))
+    .catch(err => {
+      console.error('🔥  something went wrong')
+      console.error(err.message)
+      process.exit(1)
+    })
+}

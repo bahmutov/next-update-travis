@@ -1,3 +1,3 @@
 'use strict'
 
-module.exports = true
+module.exports = require('./postinstall')

@@ -40,7 +40,7 @@
     "update"
   ],
   "license": "MIT",
-  "main": "src/",
+  "main": "src/postinstall.js",
   "publishConfig": {
     "registry": "http://registry.npmjs.org/"
   },
