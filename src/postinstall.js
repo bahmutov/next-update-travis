@@ -145,9 +145,10 @@ function showSuccessMessage (scriptName) {
   👍  Up to date dependencies
 
   Optional: add this badge to the README.md file
+  (change weekly to your Travis CRON job perod)
 
   [![next-update-travis badge][nut-badge]][nut-readme]
-  [nut-badge]: https://img.shields.io/badge/next--update--travis-ok-green.svg
+  [nut-badge]: https://img.shields.io/badge/next--update--travis-weekly-green.svg
   [nut-readme]: https://github.com/bahmutov/next-update-travis#readme
 
   For more details visit https://github.com/bahmutov/next-update-travis

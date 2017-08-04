@@ -82,11 +82,13 @@ next-update --allow patch
 ## Badge
 
 Let other people know that your module is periodically updated with this
-Markdown SVG badge [![next-update-travis badge][nut-badge]][nut-readme]
+Markdown SVG badge [![next-update-travis badge][nut-badge]][nut-readme].
+You can use "daily", "weekly" and "monthly" period (to match what you have
+picked as Travis Cron job frequency)
 
 ```
 [![next-update-travis badge][nut-badge]][nut-readme]
-[nut-badge]: https://img.shields.io/badge/next--update--travis-ok-green.svg
+[nut-badge]: https://img.shields.io/badge/next--update--travis-weekly-green.svg
 [nut-readme]: https://github.com/bahmutov/next-update-travis#readme
 ```
 
@@ -190,5 +192,5 @@ OTHER DEALINGS IN THE SOFTWARE.
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg
 [standard-url]: http://standardjs.com/
 
-[nut-badge]: https://img.shields.io/badge/next--update--travis-ok-green.svg
+[nut-badge]: https://img.shields.io/badge/next--update--travis-weekly-green.svg
 [nut-readme]: https://github.com/bahmutov/next-update-travis#readme
