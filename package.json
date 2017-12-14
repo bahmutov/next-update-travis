@@ -86,6 +86,6 @@
     "common-tags": "1.5.1",
     "debug": "2.6.9",
     "execa": "0.8.0",
-    "parse-github-url": "1.0.1"
+    "parse-github-url": "1.0.2"
   }
 }
