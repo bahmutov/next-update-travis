@@ -71,7 +71,7 @@
     "license-checker": "11.0.0",
     "mocha": "3.5.3",
     "nsp": "2.8.1",
-    "pre-git": "3.16.0",
+    "pre-git": "3.17.0",
     "prettier-standard": "6.0.0",
     "semantic-release": "^6.3.6",
     "simple-commit-message": "3.3.2",
@@ -83,7 +83,7 @@
   },
   "dependencies": {
     "am-i-a-dependency": "1.1.2",
-    "common-tags": "1.5.1",
+    "common-tags": "1.6.0",
     "debug": "2.6.9",
     "execa": "0.8.0",
     "parse-github-url": "1.0.2"
