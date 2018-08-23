@@ -85,7 +85,7 @@
     "am-i-a-dependency": "1.1.2",
     "common-tags": "1.8.0",
     "debug": "2.6.9",
-    "execa": "0.10.0",
+    "execa": "0.11.0",
     "parse-github-url": "1.0.2"
   }
 }
