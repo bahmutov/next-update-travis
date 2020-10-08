@@ -63,7 +63,7 @@
     "postinstall": "node src/postinstall.js"
   },
   "devDependencies": {
-    "ban-sensitive-files": "1.9.10",
+    "ban-sensitive-files": "1.9.12",
     "dependency-check": "2.10.1",
     "deps-ok": "1.4.1",
     "git-issues": "1.3.1",
